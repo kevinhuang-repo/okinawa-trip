@@ -1,0 +1,1455 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>5/3-5/6 沖繩實戰行程｜四天三夜互動指南</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Zen+Maru+Gothic:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --okinawa-blue: #006994;
+      --okinawa-deep: #003b5c;
+      --okinawa-light: #4db8ff;
+      --sand: #f5e6d3;
+      --sunset: #ff8c42;
+      --sunset-soft: #ffb088;
+      --coral: #ff6b6b;
+      --text: #1a1a2e;
+      --text-light: #555;
+      --bg: #faf9f7;
+      --card: #ffffff;
+      --accent: #00b4d8;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans TC', 'Zen Maru Gothic', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--okinawa-light); border-radius: 4px; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    @keyframes wave {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    @keyframes sunBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, #006994 0%, #00b4d8 40%, #ff8c42 80%, #ffb088 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200%;
+      height: 120px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath fill='%23faf9f7' fill-opacity='1' d='M0,60 C200,90 400,30 600,60 C800,90 1000,30 1200,60 L1200,120 L0,120 Z'/%3E%3C/svg%3E") repeat-x;
+      background-size: 50% 100%;
+      animation: wave 8s linear infinite;
+      z-index: 2;
+    }
+
+    .hero-content { position: relative; z-index: 3; padding: 2rem; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      margin-bottom: 1.5rem;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .hero h1 span {
+      display: block;
+      font-size: clamp(1rem, 3vw, 1.5rem);
+      font-weight: 300;
+      letter-spacing: 8px;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.95);
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-weight: 300;
+    }
+
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+
+    .stat-item { text-align: center; color: white; }
+    .stat-item .number { font-size: 2.5rem; font-weight: 900; display: block; line-height: 1; }
+    .stat-item .label { font-size: 0.85rem; opacity: 0.8; letter-spacing: 1px; }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 140px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      font-size: 0.85rem;
+      opacity: 0.7;
+      animation: float 2s ease-in-out infinite;
+      z-index: 3;
+    }
+    .scroll-hint::after { content: '↓'; display: block; text-align: center; margin-top: 0.3rem; font-size: 1.2rem; }
+
+    .floating-icon {
+      position: absolute;
+      font-size: 2rem;
+      opacity: 0.15;
+      animation: float 6s ease-in-out infinite;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+      padding: 0.8rem 0;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo { font-weight: 900; font-size: 1.2rem; color: var(--okinawa-blue); letter-spacing: 2px; }
+
+    .nav-links { display: flex; gap: 1.5rem; list-style: none; }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-light);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.3s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--sunset);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--okinawa-blue); }
+    .nav-links a:hover::after { width: 100%; }
+
+    section { max-width: 1200px; margin: 0 auto; padding: 5rem 2rem; }
+    .section-title { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 900; margin-bottom: 0.5rem; color: var(--okinawa-deep); }
+    .section-sub { color: var(--text-light); margin-bottom: 3rem; font-size: 1.05rem; }
+
+    .quick-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .quick-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .quick-card:hover { transform: translateY(-5px); box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
+    .quick-card .icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .quick-card .label { font-size: 0.8rem; color: var(--text-light); margin-bottom: 0.3rem; }
+    .quick-card .value { font-size: 1.05rem; font-weight: 700; color: var(--okinawa-deep); }
+
+    .packing-container {
+      background: linear-gradient(135deg, #e0f7fa 0%, #fff3e0 100%);
+      border-radius: 24px;
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .packing-container::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 150px;
+      height: 150px;
+      background: rgba(255,140,66,0.1);
+      border-radius: 50%;
+    }
+
+    .packing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .pack-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: white;
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 2px solid transparent;
+      user-select: none;
+    }
+    .pack-item:hover { border-color: var(--okinawa-light); }
+    .pack-item.checked { background: #e8f5e9; border-color: #81c784; }
+    .pack-item.checked .pack-text { text-decoration: line-through; opacity: 0.5; }
+
+    .pack-checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--okinawa-light);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      flex-shrink: 0;
+    }
+    .pack-item.checked .pack-checkbox { background: #4caf50; border-color: #4caf50; }
+    .pack-checkbox::after {
+      content: '✓';
+      color: white;
+      font-weight: 900;
+      opacity: 0;
+      transform: scale(0);
+      transition: all 0.2s;
+    }
+    .pack-item.checked .pack-checkbox::after { opacity: 1; transform: scale(1); }
+    .pack-text { font-weight: 500; }
+    .pack-note { font-size: 0.8rem; color: var(--text-light); margin-top: 0.2rem; }
+
+    .packing-progress { margin-top: 1.5rem; text-align: center; }
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(0,0,0,0.08);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--okinawa-light), var(--sunset));
+      border-radius: 4px;
+      transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 0%;
+    }
+
+    .day-tabs { display: flex; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+    .day-tab {
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      border: 2px solid var(--okinawa-light);
+      background: white;
+      color: var(--okinawa-blue);
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    .day-tab:hover { background: var(--okinawa-light); color: white; }
+    .day-tab.active {
+      background: var(--okinawa-blue);
+      border-color: var(--okinawa-blue);
+      color: white;
+      box-shadow: 0 4px 15px rgba(0,105,148,0.3);
+    }
+
+    .day-content { display: none; animation: fadeUp 0.5s ease; }
+    .day-content.active { display: block; }
+
+    .day-header {
+      background: linear-gradient(135deg, var(--okinawa-blue), var(--okinawa-light));
+      color: white;
+      padding: 2rem;
+      border-radius: 20px;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .day-header::after {
+      content: '';
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 100px;
+      height: 100px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    .day-header h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+    .day-header p { opacity: 0.9; font-weight: 300; }
+
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--okinawa-light), var(--sunset));
+      border-radius: 3px;
+    }
+
+    .timeline-item { position: relative; margin-bottom: 2rem; padding-left: 2rem; cursor: pointer; }
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -1.4rem;
+      top: 0.3rem;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border: 3px solid var(--sunset);
+      border-radius: 50%;
+      transition: all 0.3s;
+      z-index: 2;
+    }
+    .timeline-item:hover::before { background: var(--sunset); transform: scale(1.2); }
+
+    .timeline-time {
+      display: inline-block;
+      background: var(--sunset-soft);
+      color: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .timeline-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      border: 1px solid rgba(0,0,0,0.04);
+      transition: all 0.3s;
+    }
+    .timeline-item:hover .timeline-card { box-shadow: 0 8px 25px rgba(0,0,0,0.1); transform: translateX(5px); }
+    .timeline-card h4 { font-size: 1.15rem; color: var(--okinawa-deep); margin-bottom: 0.5rem; }
+    .timeline-card .meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+
+    .meta-tag {
+      font-size: 0.8rem;
+      padding: 0.2rem 0.7rem;
+      border-radius: 50px;
+      background: #e3f2fd;
+      color: var(--okinawa-blue);
+      font-weight: 500;
+    }
+    .meta-tag.food { background: #fff3e0; color: #e65100; }
+    .meta-tag.drink { background: #fce4ec; color: #c2185b; }
+    .meta-tag.spot { background: #e8f5e9; color: #2e7d32; }
+    .meta-tag.hotel { background: #f3e5f5; color: #6a1b9a; }
+    .meta-tag.transport { background: #e0f2f1; color: #00695c; }
+    .meta-tag.flight { background: #ede7f6; color: #4527a0; }
+
+    .map-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+      color: #2e7d32;
+      padding: 0.4rem 0.9rem;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-decoration: none;
+      margin-top: 0.6rem;
+      transition: all 0.3s;
+      border: 1px solid #a5d6a7;
+    }
+    .map-link:hover {
+      background: linear-gradient(135deg, #2e7d32, #43a047);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(46,125,50,0.25);
+    }
+
+    .restaurant-info {
+      background: linear-gradient(135deg, #fff8e1, #fff3e0);
+      border-radius: 12px;
+      padding: 1rem;
+      margin-top: 0.8rem;
+      font-size: 0.88rem;
+    }
+    .restaurant-info .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-bottom: 0.4rem;
+    }
+    .restaurant-info .info-row:last-child { margin-bottom: 0; }
+    .restaurant-info .info-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .restaurant-info .info-label {
+      font-weight: 700;
+      color: var(--sunset);
+      flex-shrink: 0;
+    }
+    .restaurant-info .info-text { color: var(--text-light); }
+
+    .timeline-detail {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s;
+      opacity: 0;
+    }
+    .timeline-item.expanded .timeline-detail { max-height: 600px; opacity: 1; margin-top: 1rem; }
+    .timeline-detail p { color: var(--text-light); font-size: 0.95rem; margin-bottom: 0.5rem; }
+
+    .knowledge-box {
+      background: linear-gradient(135deg, #fff8e1, #fffde7);
+      border-left: 4px solid var(--sunset);
+      padding: 1rem;
+      border-radius: 0 12px 12px 0;
+      margin-top: 0.8rem;
+      font-size: 0.9rem;
+    }
+    .knowledge-box strong { color: var(--sunset); display: block; margin-bottom: 0.3rem; }
+
+    .strategy-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+    .strategy-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      border: 2px solid transparent;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .strategy-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+    .strategy-card.hot::before { background: linear-gradient(90deg, #ff6b6b, #ff8c42); }
+    .strategy-card.warm::before { background: linear-gradient(90deg, #ff8c42, #ffd54f); }
+    .strategy-card.gold::before { background: linear-gradient(90deg, #ffd54f, #81c784); }
+    .strategy-card.cool::before { background: linear-gradient(90deg, #81c784, #4db8ff); }
+    .strategy-card:hover { border-color: var(--okinawa-light); transform: translateY(-3px); }
+    .strategy-time { font-size: 0.85rem; font-weight: 700; color: var(--text-light); margin-bottom: 0.3rem; }
+    .strategy-temp { font-size: 2rem; font-weight: 900; margin-bottom: 0.5rem; }
+    .strategy-card.hot .strategy-temp { color: #ff6b6b; }
+    .strategy-card.warm .strategy-temp { color: #ff8c42; }
+    .strategy-card.gold .strategy-temp { color: #f9a825; }
+    .strategy-card.cool .strategy-temp { color: #4db8ff; }
+    .strategy-action { font-weight: 700; color: var(--okinawa-deep); margin-bottom: 0.3rem; }
+    .strategy-pm { font-size: 0.85rem; color: var(--text-light); font-style: italic; }
+
+    .risk-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; }
+    .risk-card {
+      background: var(--card);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      transition: all 0.3s;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .risk-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,0.12); }
+    .risk-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
+    .risk-name { font-weight: 700; font-size: 1.1rem; color: var(--okinawa-deep); }
+    .risk-prob { font-size: 0.8rem; padding: 0.3rem 0.8rem; border-radius: 50px; font-weight: 700; }
+    .prob-high { background: #ffebee; color: #c62828; }
+    .prob-med { background: #fff3e0; color: #ef6c00; }
+    .prob-low { background: #e8f5e9; color: #2e7d32; }
+    .risk-bar-container { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+    .risk-bar { flex: 1; height: 6px; background: #eee; border-radius: 3px; overflow: hidden; }
+    .risk-bar-fill { height: 100%; border-radius: 3px; transition: width 1s cubic-bezier(0.16, 1, 0.3, 1); width: 0%; }
+    .risk-mitigation { font-size: 0.9rem; color: var(--text-light); padding-top: 0.8rem; border-top: 1px solid #f0f0f0; }
+    .risk-mitigation strong { color: var(--okinawa-blue); display: block; margin-bottom: 0.3rem; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
+
+    .food-categories { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.2rem; }
+    .food-card {
+      background: var(--card);
+      border-radius: 20px;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      transition: all 0.3s;
+      border: 2px solid transparent;
+    }
+    .food-card:hover { transform: translateY(-8px) rotate(1deg); border-color: var(--sunset-soft); box-shadow: 0 15px 40px rgba(255,140,66,0.15); }
+    .food-emoji { font-size: 3rem; margin-bottom: 0.8rem; display: block; animation: float 3s ease-in-out infinite; }
+    .food-card:nth-child(2) .food-emoji { animation-delay: 0.5s; }
+    .food-card:nth-child(3) .food-emoji { animation-delay: 1s; }
+    .food-card:nth-child(4) .food-emoji { animation-delay: 1.5s; }
+    .food-card:nth-child(5) .food-emoji { animation-delay: 2s; }
+    .food-name { font-weight: 700; font-size: 1.1rem; color: var(--okinawa-deep); margin-bottom: 0.3rem; }
+    .food-rec { color: var(--sunset); font-weight: 700; font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .food-reason { font-size: 0.85rem; color: var(--text-light); }
+
+    .music-section {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      border-radius: 24px;
+      padding: 2.5rem;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+    .music-section::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -20%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(255,140,66,0.2), transparent 70%);
+      border-radius: 50%;
+    }
+    .music-section .section-title { color: white; }
+    .music-section .section-sub { color: rgba(255,255,255,0.7); }
+    .playlist { display: grid; gap: 0.8rem; margin-top: 1.5rem; position: relative; z-index: 2; }
+    .track {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: rgba(255,255,255,0.08);
+      padding: 1rem 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: 1px solid rgba(255,255,255,0.05);
+    }
+    .track:hover { background: rgba(255,255,255,0.15); transform: translateX(5px); }
+    .track.playing { background: rgba(255,140,66,0.2); border-color: rgba(255,140,66,0.4); }
+    .play-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--sunset);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+    .track:hover .play-btn { transform: scale(1.1); }
+    .play-icon {
+      width: 0;
+      height: 0;
+      border-left: 12px solid white;
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+      margin-left: 3px;
+    }
+    .track.playing .play-icon {
+      width: 12px;
+      height: 14px;
+      border: none;
+      margin-left: 0;
+      display: flex;
+      gap: 3px;
+    }
+    .track.playing .play-icon::before,
+    .track.playing .play-icon::after {
+      content: '';
+      width: 4px;
+      height: 100%;
+      background: white;
+      border-radius: 2px;
+      animation: pulse 1s ease-in-out infinite;
+    }
+    .track-info { flex: 1; }
+    .track-title { font-weight: 700; margin-bottom: 0.2rem; }
+    .track-artist { font-size: 0.85rem; opacity: 0.7; }
+    .track-scene { font-size: 0.8rem; opacity: 0.5; }
+
+    .footer {
+      text-align: center;
+      padding: 4rem 2rem;
+      background: linear-gradient(180deg, var(--bg), #e8f4f8);
+    }
+    .footer h2 { font-size: 1.8rem; color: var(--okinawa-deep); margin-bottom: 1rem; }
+    .footer p { color: var(--text-light); max-width: 500px; margin: 0 auto 2rem; }
+    .go-btn {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--sunset), var(--coral));
+      color: white;
+      padding: 1rem 3rem;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-decoration: none;
+      box-shadow: 0 8px 25px rgba(255,107,107,0.3);
+      transition: all 0.3s;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .go-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(255,107,107,0.4); }
+    .sunset-visual {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--sunset), #ff4757);
+      border-radius: 50%;
+      margin: 2rem auto;
+      box-shadow: 0 0 60px rgba(255,140,66,0.4);
+      animation: sunBounce 4s ease-in-out infinite;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-stats { gap: 1.5rem; }
+      .timeline { padding-left: 1.2rem; }
+      section { padding: 3rem 1.5rem; }
+      .packing-grid { grid-template-columns: 1fr; }
+    }
+
+    .wave-divider {
+      height: 60px;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 60'%3E%3Cpath fill='%23faf9f7' fill-opacity='1' d='M0,30 C150,50 350,10 600,30 C850,50 1050,10 1200,30 L1200,60 L0,60 Z'/%3E%3C/svg%3E");
+      background-size: 1200px 100%;
+    }
+    .bg-blue { background: linear-gradient(180deg, #e3f2fd, var(--bg)); }
+    .bg-sand { background: linear-gradient(180deg, #fff3e0, var(--bg)); }
+    .bg-coral { background: linear-gradient(180deg, #ffebee, var(--bg)); }
+
+    .hotel-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+      color: #6a1b9a;
+      padding: 0.4rem 1rem;
+      border-radius: 50px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="floating-icon" style="top:15%;left:10%;">🌊</div>
+    <div class="floating-icon" style="top:25%;right:15%;animation-delay:1s;">⛩️</div>
+    <div class="floating-icon" style="top:60%;left:8%;animation-delay:2s;">🍺</div>
+    <div class="floating-icon" style="bottom:30%;right:10%;animation-delay:3s;">🌺</div>
+    <div class="floating-icon" style="top:45%;right:25%;animation-delay:1.5s;">🐟</div>
+
+    <div class="hero-content">
+      <div class="hero-badge">5/3-5/6 實戰行程｜單身黃金漢模式 ON</div>
+      <h1>
+        沖繩四天三夜
+        <span>OKINAWA / 5.3-5.6 / FD230・FD231</span>
+      </h1>
+      <p class="hero-sub">
+        你不需要「旅行」，你需要「系統性降溫與認知卸載」。<br>
+        國際通微醺開場 → 五間 Senbero 巡禮 → 法餐日落 → 糸滿告別
+      </p>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="number">4</span><span class="label">DAYS</span></div>
+        <div class="stat-item"><span class="number">5+</span><span class="label">居酒屋</span></div>
+        <div class="stat-item"><span class="number">2</span><span class="label">飯店</span></div>
+        <div class="stat-item"><span class="number">FD</span><span class="label">AirAsia</span></div>
+      </div>
+    </div>
+    <div class="scroll-hint">開始探索</div>
+  </header>
+
+  <nav class="sticky-nav">
+    <div class="nav-inner">
+      <div class="nav-logo">🌊 OKINAWA 5/3-5/6</div>
+      <ul class="nav-links">
+        <li><a href="#quick">快速參考</a></li>
+        <li><a href="#packing">打包清單</a></li>
+        <li><a href="#itinerary">行程</a></li>
+        <li><a href="#strategy">避暑策略</a></li>
+        <li><a href="#risk">風險管理</a></li>
+        <li><a href="#food">美食</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section id="quick" class="fade-in">
+    <h2 class="section-title">快速參考卡</h2>
+    <p class="section-sub">出發前 30 秒確認所有關鍵資訊</p>
+    <div class="quick-cards">
+      <div class="quick-card">
+        <div class="icon">✈️</div>
+        <div class="label">去程 FD230</div>
+        <div class="value">13:30 TPE<br>15:55 OKA</div>
+      </div>
+      <div class="quick-card">
+        <div class="icon">✈️</div>
+        <div class="label">回程 FD231</div>
+        <div class="value">16:55 OKA<br>17:30 TPE</div>
+      </div>
+      <div class="quick-card">
+        <div class="icon">🚝</div>
+        <div class="label">機場交通</div>
+        <div class="value">單軌列車<br>前往國際通</div>
+      </div>
+      <div class="quick-card">
+        <div class="icon">🏨</div>
+        <div class="label">Day1-2 住宿</div>
+        <div class="value">那霸國際通街<br>蘭塔納飯店</div>
+      </div>
+      <div class="quick-card">
+        <div class="icon">🏨</div>
+        <div class="label">Day3 住宿</div>
+        <div class="value">沖繩格蘭維<br>花園飯店</div>
+      </div>
+      <div class="quick-card">
+        <div class="icon">📵</div>
+        <div class="label">離線目標</div>
+        <div class="value">手機 <2hr<br>5/11 On Board</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" style="background-color:#e3f2fd;"></div>
+  <div class="bg-blue">
+  <section id="packing" class="fade-in">
+    <h2 class="section-title">極簡打包清單</h2>
+    <p class="section-sub">PM 原則：If it's not a blocker, don't bring it. 目標 <3kg 登機箱。</p>
+    <div class="packing-container">
+      <div class="packing-grid">
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-checkbox"></div><div><div class="pack-text">防曬霜 SPF50+</div><div class="pack-note">唯一不可妥協項</div></div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-checkbox"></div><div><div class="pack-text">泳褲 / 泳衣 ×1</div><div class="pack-note">當天洗當天乾</div></div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-checkbox"></div><div><div class="pack-text">透氣亞麻襯衫 ×2</div><div class="pack-note">一件穿一件洗</div></div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-checkbox"></div><div><div class="pack-text">短褲 ×1</div><div class="pack-note">極簡至上</div></div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-checkbox"></div><div><div class="pack-text">人字拖 ×1</div><div class="pack-note">抵達後買也可以</div></div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-checkbox"></div><div><div class="pack-text">太陽眼鏡</div><div class="pack-note">必備護眼</div></div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-checkbox"></div><div><div class="pack-text">行動電源</div><div class="pack-note">你會在沙灘上回 Slack</div></div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-checkbox"></div><div><div class="pack-text">防水手機袋</div><div class="pack-note">海邊必備</div></div></div>
+        <div class="pack-item" onclick="togglePack(this)"><div class="pack-checkbox"></div><div><div class="pack-text">降噪耳機</div><div class="pack-note">隔絕觀光客噪音</div></div></div>
+      </div>
+      <div class="packing-progress">
+        <div style="font-size:0.9rem;color:var(--text-light);">打包進度</div>
+        <div class="progress-bar"><div class="progress-fill" id="packProgress"></div></div>
+        <div style="font-size:1.5rem;font-weight:900;color:var(--okinawa-deep);" id="packPercent">0%</div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <section id="itinerary" class="fade-in">
+    <h2 class="section-title">四天行程時間軸</h2>
+    <p class="section-sub">點擊每個行程點展開詳情、知識點、Google Maps 與餐廳資訊。</p>
+
+    <div class="day-tabs">
+      <button class="day-tab active" onclick="switchDay(1)">5/3 Day 1 抵達開喝</button>
+      <button class="day-tab" onclick="switchDay(2)">5/4 Day 2 居酒屋巡禮</button>
+      <button class="day-tab" onclick="switchDay(3)">5/5 Day 3 法餐日落</button>
+      <button class="day-tab" onclick="switchDay(4)">5/6 Day 4 糸滿告別</button>
+    </div>
+
+    <!-- DAY 1 -->
+    <div class="day-content active" id="day1">
+      <div class="day-header">
+        <div class="hotel-badge">🏨 那霸國際通街蘭塔納飯店</div>
+        <h3>🛬 5/3 (日) Day 1：抵達即開喝！國際通微醺開場</h3>
+        <p>FD230 13:30 TPE → 15:55 OKA。大黑苑燒肉 → 川かみ鮮魚・魚坊・あかつのや → Mega Donki → 一蘭拉麵。</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">13:30</div>
+          <div class="timeline-card">
+            <h4>✈️ FD230 台北起飛</h4>
+            <div class="meta"><span class="meta-tag flight">AirAsia</span><span class="meta-tag transport">TPE</span></div>
+            <p>桃園機場出發，建議提前 2 小時抵達。機場候機室簡餐解決午餐。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>AirAsia FD230 為低成本航空，注意行李限重。候機室可先吃點東西，上機後專心休息。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">15:55</div>
+          <div class="timeline-card">
+            <h4>🛬 抵達那霸機場</h4>
+            <div class="meta"><span class="meta-tag transport">入境</span><span class="meta-tag">OKA</span></div>
+            <p>落地後通關，搭單軌列車前往國際通。預計五點可 Check-in。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E9%9C%B8%E7%A9%BA%E6%B8%AF+%E5%9C%8B%E9%9A%9B%E7%B7%9A%E8%88%AA%E5%BB%88" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>那霸機場國際線不大，入境約 30-45 分鐘。單軌列車站就在國際線航廈外，到國際通約 15 分鐘。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">17:00</div>
+          <div class="timeline-card">
+            <h4>🏨 蘭塔納飯店 Check-in</h4>
+            <div class="meta"><span class="meta-tag hotel">住宿</span><span class="meta-tag">國際通</span></div>
+            <p>基地建立。放好行李，準備第一輪。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E3%83%9B%E3%83%86%E3%83%AB%E3%83%A9%E3%83%B3%E3%82%BF%E3%83%8A%E9%82%A3%E8%A6%87%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>蘭塔納飯店位於國際通街上，下樓就是戰場。建議先確認房間、放好行李，輕裝出門。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">18:00</div>
+          <div class="timeline-card">
+            <h4>🥩 大黑苑燒肉（國際通老字號）</h4>
+            <div class="meta"><span class="meta-tag food">晚餐</span><span class="meta-tag drink">酒</span></div>
+            <p>第一餐直衝燒肉。沖繩牛舌切法較厚，石垣牛油花細緻。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E9%BB%92%E8%8B%91+%E9%82%A3%E8%A6%87+%E7%84%BC%E8%82%89" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">17:00 - 24:00（週三公休）</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">石垣牛牛舌、里肌、內臟類、AGU 豬</span></div>
+            </div>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 知識點</strong>
+                大黑苑是國際通老字號燒肉店。沖繩的牛是石垣牛，油花比本島更細。點餐邏輯：先牛舌 → 里肌 → 內臟類。AGU 豬也必點。
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">20:00</div>
+          <div class="timeline-card">
+            <h4>🐟 宵夜巡禮第一彈：川かみ鮮魚</h4>
+            <div class="meta"><span class="meta-tag food">宵夜</span><span class="meta-tag drink">酒</span></div>
+            <p>最新鮮的漁獲，沒有菜單，看當天有什麼魚。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E5%B7%9D%E3%81%8B%E3%81%BF+%E9%AE%AE%E9%AD%9A+%E9%82%A3%E8%A6%87" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">建議傍晚至深夜前往（市場型態，無固定菜單）</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">當日漁獲生魚片、刺身拼盤</span></div>
+            </div>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 知識點</strong>
+                沖繩魚市場文化與本島不同，更注重當天漁獲。這種店通常沒有固定菜單，直接看冰櫃點餐，周轉率高 = 最新鮮。
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">20:40</div>
+          <div class="timeline-card">
+            <h4>🐠 魚坊 / あかつのや</h4>
+            <div class="meta"><span class="meta-tag food">宵夜</span><span class="meta-tag drink">酒</span></div>
+            <p>續攤。體驗不同魚店的風格與氛圍。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E5%9D%8A+%E3%81%82%E3%81%8B%E3%81%A4%E3%81%AE%E3%82%84+%E9%82%A3%E8%A6%87" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">市場型態，建議傍晚～21:00 前</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">當日魚料理、煮魚、魚湯</span></div>
+            </div>
+            <div class="timeline-detail">
+              <p>魚坊與あかつのや都在國際通周邊的市場區域，步行可達。續攤重點在體驗不同店家的個性，不用點太多。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">21:30</div>
+          <div class="timeline-card">
+            <h4>🛒 Mega Donki 採購</h4>
+            <div class="meta"><span class="meta-tag">購物</span><span class="meta-tag">補給</span></div>
+            <p>零食、泡麵、泡盛、啤酒補給。單身旅行儀式感。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Mega+Don+Quijote+%E5%9C%8B%E9%9A%9B%E9%80%9A+%E6%B2%96%E7%B9%A9" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>Don Quijote 國際通店營業到深夜，是補貨的最佳選擇。推薦買沖繩限定泡盛、Orion 啤酒、雪鹽餅乾當伴手禮。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">22:30</div>
+          <div class="timeline-card">
+            <h4>🍜 一蘭拉麵（深夜獨食收尾）</h4>
+            <div class="meta"><span class="meta-tag food">宵夜</span></div>
+            <p>最後一碗收工。沖繩的水質讓湯頭味道與本島略有不同。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%80%E8%98%AD%E6%8B%89%E9%BA%B5+%E9%82%A3%E8%A6%87+%E5%9C%8B%E9%9A%9B%E9%80%9A" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">24 小時營業</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">天然豚骨拉麵、溏心蛋、加麵（替玉）</span></div>
+            </div>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 知識點</strong>
+                一蘭在沖繩的味道與本島有些微差異，推測與水質有關。獨立座位區設計非常適合單人旅行者。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 2 -->
+    <div class="day-content" id="day2">
+      <div class="day-header">
+        <div class="hotel-badge">🏨 那霸國際通街蘭塔納飯店</div>
+        <h3>🍺 5/4 (一) Day 2：波上宮淨化・五間 Senbero 居酒屋巡禮</h3>
+        <p>最狂企劃：一天五間 Senbero。天しーさー → ヱイクラ → 魚友 → 足立屋 → TRITON。屋台村收尾。</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">09:00</div>
+          <div class="timeline-card">
+            <h4>⛩️ 早午餐 + 波上宮參拜</h4>
+            <div class="meta"><span class="meta-tag spot">景點</span><span class="meta-tag food">早午餐</span></div>
+            <p>開喝之前，先讓心靈吃飽。沖繩最靠近市區的海邊神社。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E6%B3%A2%E4%B8%8A%E5%AE%AE+%E6%B2%96%E7%B9%A9" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>波上宮是沖繩最著名的神社，建於珊瑚礁懸崖上。建議先吃個輕食早午餐，再慢慢散步過去參拜。海風療癒。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">14:00</div>
+          <div class="timeline-card">
+            <h4>🍻 第一間：大衆酒場 天しーさー</h4>
+            <div class="meta"><span class="meta-tag drink">Senbero</span><span class="meta-tag food">美食</span></div>
+            <p>Senbero セット，1000 日圓的快樂。評分：4/5，開場很穩。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E7%9C%BE%E9%85%92%E5%A0%B4+%E5%A4%A9%E3%81%97%E3%83%BC%E3%81%95%E3%83%BC+%E9%82%A3%E8%A6%87" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">約 14:00 - 23:00（居酒屋型態）</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">Senbero セット（泡盛/Highball + 小菜）、沖繩家庭料理</span></div>
+            </div>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 什麼是 Senbero？</strong>
+                沖繩特色酒文化，約 1000 日圓給你一杯酒配小菜，讓你可以快速換店體驗不同風格。不是為了喝醉，是為了體驗店魂。
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">15:00</div>
+          <div class="timeline-card">
+            <h4>🍻 第二間：大衆酒場 ヱイクラ</h4>
+            <div class="meta"><span class="meta-tag drink">Senbero</span><span class="meta-tag food">美食</span></div>
+            <p>招牌特色菜令人驚喜。評分：4.5/5，比第一間更驚喜。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E5%A4%A7%E7%9C%BE%E9%85%92%E5%A0%B4+%E3%83%B1%E3%82%A4%E3%82%AF%E3%83%A9+%E9%82%A3%E8%A6%87" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">約 14:00 - 23:00</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">隱藏版招牌菜、泡盛、沖繩傳統小菜</span></div>
+            </div>
+            <div class="timeline-detail">
+              <p>ヱイクラ的招牌菜是常客才知道的隱藏菜單。建議點泡盛配沖繩傳統小菜，感受在地氛圍。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">16:00</div>
+          <div class="timeline-card">
+            <h4>🍻 第三間：魚友(魚々)</h4>
+            <div class="meta"><span class="meta-tag drink">Senbero</span><span class="meta-tag food">海鮮</span></div>
+            <p>海鮮專門，生魚片配啤酒是沖繩標配。評分：4/5。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E9%AD%9A%E5%8F%8B+%E9%AD%9A%E3%80%85+%E9%82%A3%E8%A6%87+%E5%B1%85%E9%85%92%E5%B1%8B" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">約 15:00 - 23:00</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">當日直送生魚片、烤魚、海鮮拼盤</span></div>
+            </div>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 知識點</strong>
+                海鮮專門居酒屋的魚獲通常當天早上從系滿或泊港直送。點生魚片時問問「今日のオススメ」準沒錯。
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">17:00</div>
+          <div class="timeline-card">
+            <h4>🍻 第四間：足立屋</h4>
+            <div class="meta"><span class="meta-tag drink">Senbero</span></div>
+            <p>開始微醺，臉有點紅。評分：3.5/5，氣氛好但酒普通。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E8%B6%B3%E7%AB%8B%E5%B1%8B+%E9%82%A3%E8%A6%87+%E5%B1%85%E9%85%92%E5%B1%8B" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">約 16:00 - 23:00</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">Highball、沖繩小菜、氣氛取勝</span></div>
+            </div>
+            <div class="timeline-detail">
+              <p>足立屋的強項是氛圍而非酒單。這時候已經有點微醺，真實反應和臉紅都是好素材，記得錄下來。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">18:00</div>
+          <div class="timeline-card">
+            <h4>🍲 第五間：せんべろしゃぶしゃぶ TRITON</h4>
+            <div class="meta"><span class="meta-tag drink">Senbero</span><span class="meta-tag food">鍋物</span></div>
+            <p>涮涮鍋收尾，火鍋配酒的完美組合。評分：4/5。五間達成！</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E3%81%9B%E3%82%93%E3%81%B9%E3%82%8D%E3%81%97%E3%82%83%E3%81%B6%E3%81%97%E3%82%83%E3%81%B6+TRITON+%E9%82%A3%E8%A6%87" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">約 17:00 - 23:00</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">Senbero 涮涮鍋セット、豬肉片、泡盛</span></div>
+            </div>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 五間總評</strong>
+                天しーさー 4/5 → ヱイクラ 4.5/5 → 魚友 4/5 → 足立屋 3.5/5 → TRITON 4/5。控制酒量，微醺即可不要爛醉。
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">20:00</div>
+          <div class="timeline-card">
+            <h4>🍢 國際通屋台村串燒 + 超商精釀回房</h4>
+            <div class="meta"><span class="meta-tag food">宵夜</span><span class="meta-tag drink">酒</span></div>
+            <p>還沒結束！屋台村邊走邊吃，最後買瓶超商精釀啤酒回飯店陽台。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E5%9C%8B%E9%9A%9B%E9%80%9A%E5%B1%8B%E5%8F%B0%E6%9D%91+%E6%B2%96%E7%B9%A9" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">約 18:00 - 24:00</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">串燒、塔可飯、沖繩麵、精釀啤酒</span></div>
+            </div>
+            <div class="timeline-detail">
+              <p>國際通屋台村約有 20 間小店，串燒、塔可飯、沖繩麵一應俱全。買瓶精釀啤酒回蘭塔納飯店，在陽台聽國際通的聲音收尾。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 3 -->
+    <div class="day-content" id="day3">
+      <div class="day-header">
+        <div class="hotel-badge">🏨 沖繩格蘭維花園飯店（換飯店）</div>
+        <h3>🌅 5/5 (二) Day 3：新都心法餐・美麗 Sun Beach 日落・Outlet 採買</h3>
+        <p>最 Chill 的一天。11:00 退房 → ビストロモンマルトル → 美麗 Sun Beach → Outlet → IIAS → 海あじ。</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">11:00</div>
+          <div class="timeline-card">
+            <h4>🏨 蘭塔納飯店退房 + 寄行李</h4>
+            <div class="meta"><span class="meta-tag hotel">退房</span><span class="meta-tag">行李</span></div>
+            <p>退房後將行李寄放，輕裝前往新都心。坐單軌列車（Mono Rail）。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E3%83%9B%E3%83%86%E3%83%AB%E3%83%A9%E3%83%B3%E3%82%BF%E3%83%8A%E9%82%A3%E8%A6%87%E5%9B%BD%E9%9A%9B%E9%80%9A%E3%82%8A" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>蘭塔納飯店可寄放行李。輕裝後坐單軌到新都心，約 15 分鐘。記得保留手機電力下午導航用。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">11:30</div>
+          <div class="timeline-card">
+            <h4>🍷 ビストロモンマルトル（le Bistro Montmartre）</h4>
+            <div class="meta"><span class="meta-tag food">法餐</span><span class="meta-tag drink">酒</span></div>
+            <p>新都心的隱藏版法式小酒館。法式技術 + 沖繩食材是絕配。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E3%83%93%E3%82%B9%E3%83%88%E3%83%AD%E3%83%A2%E3%83%B3%E3%83%9E%E3%83%AB%E3%83%88%E3%83%AB+%E6%96%B0%E9%83%BD%E5%BF%83+%E6%B2%96%E7%B9%A9" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">午餐 11:30-15:00（LO 14:00）/ 晚餐 18:00-23:00（週一公休）</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">塞納河套餐（前菜→湯→魚料理→肉料理→甜點）、天然葡萄酒</span></div>
+            </div>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 為什麼來沖繩吃法餐？</strong>
+                沖繩的海鮮、蔬菜都是當地產，法式技術配上沖繩食材，這個組合只有這裡有。推薦點當季魚類主菜。
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">13:30</div>
+          <div class="timeline-card">
+            <h4>🚶 逛新都心 + 回飯店拿行李</h4>
+            <div class="meta"><span class="meta-tag">逛街</span><span class="meta-tag transport">Uber</span></div>
+            <p>午餐後在新都心閒逛，之後回蘭塔納拿行李，叫 Uber 前往新飯店。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E6%96%B0%E9%83%BD%E5%BF%83+%E6%B2%96%E7%B9%A9+%E9%82%A3%E8%A6%87" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>新都心有 DFS 免稅店、百貨商場可逛。從國際通叫 Uber 到格蘭維花園飯店約 20-30 分鐘，視交通狀況。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">15:00</div>
+          <div class="timeline-card">
+            <h4>🏨 格蘭維花園飯店 Check-in</h4>
+            <div class="meta"><span class="meta-tag hotel">住宿</span></div>
+            <p>新基地確認。靠近美麗 Sun Beach，為下午的海灘做準備。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B9%A9%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%A1%E3%83%BC%E3%83%AB%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88+%E9%82%A3%E8%A6%87" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>格蘭維花園飯店靠近美麗 Sun Beach，步行即可抵達。房間開箱記得拍窗外景色。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">18:00</div>
+          <div class="timeline-card">
+            <h4>🌅 美麗 Sun Beach 日落</h4>
+            <div class="meta"><span class="meta-tag spot">核心高潮</span><span class="meta-tag drink">酒</span></div>
+            <p>從飯店走去海邊，日落前的小酌。沒有人催你，看太陽完全消失。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E7%BE%8E%E3%81%97%E3%81%8DSun+Beach+%E6%B2%96%E7%B9%A9" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 拍攝提示</strong>
+                5 月初沖繩日落約 18:45-19:00。iPhone 架三腳架拍 20-30 分鐘縮時，Osmo Pocket 3 開自動追蹤拍剪影。這是最強畫面。
+              </div>
+              <p style="margin-top:0.8rem;font-style:italic;">「這種時候你會發現，單身旅行最大的好處是——沒有人催你。」</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">19:00</div>
+          <div class="timeline-card">
+            <h4>🛍️ Outlet 採買到八點</h4>
+            <div class="meta"><span class="meta-tag">購物</span></div>
+            <p>太陽下山後的購物時間。服飾、沖繩限定、泡盛補貨。營業到 20:00。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Okinawa+Outlet+Mall+Ashibinaa" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>沖繩 Outlet 常有本島沒有的限定款。重點買酒、T-shirt、防曬補貨。注意時間，八點關門。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">20:00</div>
+          <div class="timeline-card">
+            <h4>🍽️ IIAS 吃晚餐</h4>
+            <div class="meta"><span class="meta-tag food">晚餐</span></div>
+            <p>Outlet 結束後走去 IIAS 商場吃晚餐，選擇多樣。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=IIAS+%E6%B2%96%E7%B9%A9+%E8%B1%8A%E8%A6%8B%E5%9F%8E" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">商場約 10:00-22:00，餐廳至 21:00-22:00</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">日式、西式簡餐，簡單吃不要搶戲</span></div>
+            </div>
+            <div class="timeline-detail">
+              <p>IIAS 是沖繩的大型商場，晚餐選擇從日式到西式都有。簡單吃，重點在後面的宵夜。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">21:00</div>
+          <div class="timeline-card">
+            <h4>🦐 海あじ O.TOSHI丸（深夜海鮮宵夜）</h4>
+            <div class="meta"><span class="meta-tag food">海鮮</span><span class="meta-tag drink">酒</span></div>
+            <p>最後一晚的宵夜，要吃得像當地人。暗光氛圍核心。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E6%B5%B7%E3%81%82%E3%81%98+O.TOSHI%E4%B8%B8+%E6%B2%96%E7%B9%A9" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">約 18:00 - 24:00</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">烤魚、海鮮料理、泡盛、暗光氛圍絕佳</span></div>
+            </div>
+            <div class="timeline-detail">
+              <p>海あじ是當地人愛去的隱藏海鮮店。建議點烤魚 + 泡盛，用最道地的方式結束 Day 3。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- DAY 4 -->
+    <div class="day-content" id="day4">
+      <div class="day-header">
+        <div class="hotel-badge">🏨 沖繩格蘭維花園飯店 → 16:55 回程</div>
+        <h3>🐟 5/6 (三) Day 4：糸滿魚市場告別早餐・滿血回家準備上工</h3>
+        <p>完結篇。FD231 16:55 OKA → 17:30 TPE。日本最南端魚市場的海鮮丼，與沖繩說再見。</p>
+      </div>
+      <div class="timeline">
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">09:00</div>
+          <div class="timeline-card">
+            <h4>🍳 格蘭維花園悠閒早餐 + 打包退房</h4>
+            <div class="meta"><span class="meta-tag food">早餐</span><span class="meta-tag hotel">退房</span></div>
+            <p>最後的悠閒早餐。窗外的景色多看一眼。行李打包、Check-out。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E6%B2%96%E7%B9%A9%E3%82%B0%E3%83%A9%E3%83%B3%E3%83%A1%E3%83%BC%E3%83%AB%E3%83%AA%E3%82%BE%E3%83%BC%E3%83%88+%E9%82%A3%E8%A6%87" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>飯店早餐通常有沖繩特色選項：海葡萄、沖繩麵、豬肉蛋飯糰。慢慢吃，這是最後的充電。退房後行李可寄放櫃台。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">10:30</div>
+          <div class="timeline-card">
+            <h4>🚗 Uber 前往糸滿魚市場</h4>
+            <div class="meta"><span class="meta-tag transport">Uber</span></div>
+            <p>叫 Uber 前往日本最南端的魚市場。車程約 30-40 分鐘。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E7%B3%B8%E6%BB%BF%E9%AD%9A%E5%B8%82%E5%A0%B4+%E6%B2%96%E7%B9%A9" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>從格蘭維花園飯店到糸滿魚市場建議叫 Uber，公車班次少且耗時。提前確認 Uber 在該區域的服務狀況。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">11:30</div>
+          <div class="timeline-card">
+            <h4>🐟 糸滿魚市場（日本最南端）</h4>
+            <div class="meta"><span class="meta-tag food">核心高潮</span><span class="meta-tag spot">市場</span></div>
+            <p>用最道地的方式跟沖繩說再見。沒有觀光客的精緻，只有當地人的真實。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E7%B3%B8%E6%BB%BF%E6%BC%81%E6%A5%AD%E5%8D%94%E5%90%8C%E7%B5%84%E5%90%88%E3%81%8A%E9%AD%9A%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank">🗺️ Google Maps</a>
+            <div class="restaurant-info">
+              <div class="info-row"><span class="info-icon">🕐</span><span class="info-label">營業時間：</span><span class="info-text">9:00 - 18:00（部分店家週一休息）</span></div>
+              <div class="info-row"><span class="info-icon">🍽️</span><span class="info-label">推薦菜色：</span><span class="info-text">自製海鮮丼、鮪魚大腹、海膽、干貝、炸魚塊吃到飽 450 日圓</span></div>
+            </div>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 糸滿小知識</strong>
+                日本最南端的魚市場之一，位於「道之驛糸滿」內。比那霸泊いゆまち更在地、更少觀光客。建議中午前抵達，5 月當季魚獲豐富。與攤商聊天問魚名和推薦吃法。
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">13:00</div>
+          <div class="timeline-card">
+            <h4>🛍️ （Optional）Outlet 最後採買</h4>
+            <div class="meta"><span class="meta-tag">購物</span></div>
+            <p>如時間充裕，回程可再看是否去 Outlet 最後衝刺。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Okinawa+Outlet+Mall+Ashibinaa" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>時間緊迫的話優先保留魚市場素材，Outlet 可捨。務必 14:30 前抵達機場。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">14:30</div>
+          <div class="timeline-card">
+            <h4>✈️ 那霸機場（預留通關時間）</h4>
+            <div class="meta"><span class="meta-tag transport">機場</span><span class="meta-tag flight">FD231</span></div>
+            <p>抵達機場，預留足夠通關時間。16:55 起飛。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E9%82%A3%E9%9C%B8%E7%A9%BA%E6%B8%AF+%E5%9C%8B%E9%9A%9B%E7%B7%9A%E8%88%AA%E5%BB%88" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <p>那霸機場國際線不大，但建議提前 2 小時報到。報到後可逛免稅店補最後的泡盛或伴手禮。</p>
+            </div>
+          </div>
+        </div>
+        <div class="timeline-item" onclick="toggleDetail(this)">
+          <div class="timeline-time">16:55</div>
+          <div class="timeline-card">
+            <h4>✈️ FD231 起飛 → 17:30 抵達桃園</h4>
+            <div class="meta"><span class="meta-tag flight">AirAsia</span><span class="meta-tag transport">返程</span></div>
+            <p>再見，沖繩。滿血回家。飛機上或抵達台灣後用餐。</p>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88" target="_blank">🗺️ Google Maps</a>
+            <div class="timeline-detail">
+              <div class="knowledge-box">
+                <strong>💡 金句收尾</strong>
+                「四天三夜，五間居酒屋、無數杯酒、兩次日落、一隻胖貓在等我回家。這趟旅行不是逃避，是充電。5/11，JDM Program Manager，我準備好了。」
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" style="background-color:#fff3e0;"></div>
+  <div class="bg-sand">
+  <section id="strategy" class="fade-in">
+    <h2 class="section-title">避暑策略</h2>
+    <p class="section-sub">數據導向的時間管理。每天實際曬太陽時間 ≤ 3hr，超過 = 技術債（曬傷）。</p>
+    <div class="strategy-grid">
+      <div class="strategy-card hot">
+        <div class="strategy-time">10:00 - 14:00</div>
+        <div class="strategy-temp">32-35°C</div>
+        <div class="strategy-action">室內或水中</div>
+        <div class="strategy-pm">PM 類比：避開高峰負載</div>
+      </div>
+      <div class="strategy-card warm">
+        <div class="strategy-time">14:00 - 16:00</div>
+        <div class="strategy-temp">最高溫</div>
+        <div class="strategy-action">午睡 / 咖啡廳</div>
+        <div class="strategy-pm">PM 類比：系統維護時段</div>
+      </div>
+      <div class="strategy-card gold">
+        <div class="strategy-time">16:00 - 18:30</div>
+        <div class="strategy-temp">29-31°C</div>
+        <div class="strategy-action">黃金戶外時段</div>
+        <div class="strategy-pm">PM 類比：資源利用率最高</div>
+      </div>
+      <div class="strategy-card cool">
+        <div class="strategy-time">19:00 後</div>
+        <div class="strategy-temp">28°C</div>
+        <div class="strategy-action">戶外用餐</div>
+        <div class="strategy-pm">PM 類比：低風險部署</div>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <section id="risk" class="fade-in">
+    <h2 class="section-title">風險管理矩陣</h2>
+    <p class="section-sub">識別、評估、緩解。點擊卡片查看對策。</p>
+    <div class="risk-grid">
+      <div class="risk-card" onclick="toggleRisk(this)">
+        <div class="risk-header"><span class="risk-name">☀️ 曬傷</span><span class="risk-prob prob-high">80%</span></div>
+        <div class="risk-bar-container"><div class="risk-bar"><div class="risk-bar-fill" style="background:linear-gradient(90deg,#ff6b6b,#ff8c42);"></div></div></div>
+        <div class="risk-mitigation"><strong>緩解措施</strong>SPF50+ 每 2hr 補擦。物理防曬（帽子/長袖）。每天曬太陽 ≤ 3hr。</div>
+      </div>
+      <div class="risk-card" onclick="toggleRisk(this)">
+        <div class="risk-header"><span class="risk-name">🌀 颱風</span><span class="risk-prob prob-med">20%</span></div>
+        <div class="risk-bar-container"><div class="risk-bar"><div class="risk-bar-fill" style="background:linear-gradient(90deg,#ffd54f,#ff8c42);"></div></div></div>
+        <div class="risk-mitigation"><strong>緩解措施</strong>5 月颱風機率較低但仍需關注。買旅平險，保持航班彈性。出發前 3 天密切關注氣象。</div>
+      </div>
+      <div class="risk-card" onclick="toggleRisk(this)">
+        <div class="risk-header"><span class="risk-name">🍣 食物中毒</span><span class="risk-prob prob-low">10%</span></div>
+        <div class="risk-bar-container"><div class="risk-bar"><div class="risk-bar-fill" style="background:linear-gradient(90deg,#81c784,#4db8ff);"></div></div></div>
+        <div class="risk-mitigation"><strong>緩解措施</strong>生魚片選「看起來忙的店」——周轉率高 = 新鮮。避開冷冷清清的店。</div>
+      </div>
+      <div class="risk-card" onclick="toggleRisk(this)">
+        <div class="risk-header"><span class="risk-name">📱 回 Slack 成癮</span><span class="risk-prob prob-high">95%</span></div>
+        <div class="risk-bar-container"><div class="risk-bar"><div class="risk-bar-fill" style="background:linear-gradient(90deg,#c62828,#ff6b6b);"></div></div></div>
+        <div class="risk-mitigation"><strong>緩解措施</strong>開「專注模式」，通知靜音。告訴團隊你在「offsite」。每天手機使用 < 2hr。</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider" style="background-color:#ffebee;"></div>
+  <div class="bg-coral">
+  <section id="food" class="fade-in">
+    <h2 class="section-title">極簡美食清單</h2>
+    <p class="section-sub">不用動腦的決策。把決策權外包給主廚和當地人。</p>
+    <div class="food-categories">
+      <div class="food-card"><span class="food-emoji">🍙</span><div class="food-name">早餐</div><div class="food-rec">飯糰 + 冰咖啡</div><div class="food-reason">Lawson / 7-11，零等待，品質穩定</div></div>
+      <div class="food-card"><span class="food-emoji">🍜</span><div class="food-name">午餐</div><div class="food-rec">沖繩麵 / 法餐</div><div class="food-reason">隨便一家當地人多的。只有一種選項 = 無決策疲勞</div></div>
+      <div class="food-card"><span class="food-emoji">🍺</span><div class="food-name">晚餐</div><div class="food-rec">居酒屋「當日推薦」× 3</div><div class="food-reason">把決策權外包給主廚</div></div>
+      <div class="food-card"><span class="food-emoji">🍦</span><div class="food-name">甜點</div><div class="food-rec">Blue Seal 鹽冰淇淋</div><div class="food-reason">在地特色，低認知負荷</div></div>
+      <div class="food-card"><span class="food-emoji">🍻</span><div class="food-name">飲料</div><div class="food-rec">Orion 啤酒 / 泡盛</div><div class="food-reason">這是 release celebration</div></div>
+    </div>
+  </section>
+  </div>
+
+  <section class="fade-in">
+    <div class="music-section">
+      <h2 class="section-title">🎵 每日配樂</h2>
+      <p class="section-sub">City Pop → Japanese Funk → 微醺 Lo-Fi → 沖繩民謠</p>
+      <div class="playlist">
+        <div class="track" onclick="playTrack(this)"><div class="play-btn"><div class="play-icon"></div></div><div class="track-info"><div class="track-title">City Pop / 啟程</div><div class="track-artist">Night Tempo, Tatsuro Yamashita</div><div class="track-scene">5/3 飛機・抵達</div></div></div>
+        <div class="track" onclick="playTrack(this)"><div class="play-btn"><div class="play-icon"></div></div><div class="track-info"><div class="track-title">Japanese Funk / 燒肉</div><div class="track-artist">Yasuha, Anri</div><div class="track-scene">5/3 大黑苑・晚餐</div></div></div>
+        <div class="track" onclick="playTrack(this)"><div class="play-btn"><div class="play-icon"></div></div><div class="track-info"><div class="track-title">沖繩民謠 / 淨化</div><div class="track-artist">BEGIN「島唄」輕快版</div><div class="track-scene">5/4 波上宮・早晨</div></div></div>
+        <div class="track" onclick="playTrack(this)"><div class="play-btn"><div class="play-icon"></div></div><div class="track-info"><div class="track-title">Japanese Funk / 巡禮</div><div class="track-artist">Yasuha「Flyday Chinatown」</div><div class="track-scene">5/4 五間 Senbero</div></div></div>
+        <div class="track" onclick="playTrack(this)"><div class="play-btn"><div class="play-icon"></div></div><div class="track-info"><div class="track-title">法式輕音樂 / 質感</div><div class="track-artist">French Accordion Pop</div><div class="track-scene">5/5 ビストロモンマルトル</div></div></div>
+        <div class="track" onclick="playTrack(this)"><div class="play-btn"><div class="play-icon"></div></div><div class="track-info"><div class="track-title">Lofi / 日落沈浸</div><div class="track-artist">Nujabes「Aruarian Dance」</div><div class="track-scene">5/5 美麗 Sun Beach</div></div></div>
+        <div class="track" onclick="playTrack(this)"><div class="play-btn"><div class="play-icon"></div></div><div class="track-info"><div class="track-title">溫暖 Acoustic / 告別</div><div class="track-artist">吉他指彈 + 弦樂</div><div class="track-scene">5/6 糸滿・回家</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer fade-in">
+    <div class="sunset-visual"></div>
+    <h2>系統性降溫・認知卸載</h2>
+    <p>在沙灘上寫下回來後要做的「第一件事」。然後把手機關掉 4 小時。</p>
+    <button class="go-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">🌊 再回到頂端</button>
+    <p style="margin-top:3rem;font-size:0.85rem;opacity:0.5;">Version 1.0 | Status: Ready to ship. No blockers. Go/no-go: GO 🌊</p>
+  </footer>
+
+  <script>
+    function togglePack(el) { el.classList.toggle('checked'); updateProgress(); }
+    function updateProgress() {
+      const items = document.querySelectorAll('.pack-item');
+      const checked = document.querySelectorAll('.pack-item.checked');
+      const pct = Math.round((checked.length / items.length) * 100);
+      document.getElementById('packProgress').style.width = pct + '%';
+      document.getElementById('packPercent').textContent = pct + '%';
+    }
+    function switchDay(day) {
+      document.querySelectorAll('.day-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.day-content').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('day' + day).classList.add('active');
+    }
+    function toggleDetail(el) { el.classList.toggle('expanded'); }
+    function toggleRisk(el) { el.style.transform = 'scale(1.02)'; setTimeout(() => el.style.transform = '', 200); }
+    let currentTrack = null;
+    function playTrack(el) {
+      if (currentTrack) currentTrack.classList.remove('playing');
+      if (currentTrack === el) { currentTrack = null; return; }
+      el.classList.add('playing'); currentTrack = el;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+    const riskObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const fills = entry.target.querySelectorAll('.risk-bar-fill');
+          const widths = ['80%', '20%', '10%', '95%'];
+          fills.forEach((fill, i) => { setTimeout(() => { fill.style.width = widths[i]; }, i * 200); });
+          riskObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.risk-grid').forEach(el => riskObserver.observe(el));
+    document.querySelectorAll('.nav-links a').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const target = document.querySelector(link.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+</body>
+</html>
